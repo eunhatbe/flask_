@@ -1,0 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+@media(min-width:601px){
+    #main_board{
+        width: 80vw;
+        height: 80vh;
+        background-color: aquamarine;
+    }
+    
+    #message_board{
+        position: relative;
+        display: flex;
+        top: 10vh;
+        left: 25vw;
+        width: 50vw;
+        height: 60vh;
+        background-color: azure;
+    }
+
+    #text_box{
+        top:200px;
+    }
+}
+
+
