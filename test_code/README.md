@@ -1,5 +1,5 @@
 <h3>Python webSocket</h3>
-```swift
+```
 import asyncio
 import websockets
 
