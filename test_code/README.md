@@ -1,5 +1,7 @@
 <h3>Python webSocket</h3>
 ```
+
+```
 import asyncio
 import websockets
 
@@ -9,4 +11,3 @@ async def hello():
         await websocket.recv()
 
 asyncio.run(hello()) 
-```
