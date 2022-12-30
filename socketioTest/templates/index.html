@@ -1,46 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.js"
+      integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js" integrity="sha384-/KNQL8Nu5gCHLqwqfQjA689Hhoqgi2S84SNUxC3roTe4EhJ9AfLkp8QiQcU8AMzI" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var socket = io.connect("http://" + document.domain + ":" + location.port + "/mynamespace");
+            socket.on('response', function(msg){
+                $("#received").append('<p> ' + msg.username + ': ' + msg.data + '</p>');
+            });
+
+            $("form#broadcast").submit(function(event){
+                if($("#input-data").val() == "")
+                {
+                    return false;
+                }
+                socket.emit("request", {data: $("#input-data").val()});
+                $("#input-data").val("");
+                return false;
+            });
+        });
+    </script>
 </head>
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
-    
-    <form action="" method="POST">
-        <input type="text" class="username" style='font-size:15px;' placeholder="User Name"/>
-        <input type="text" class="message" style='font-size:15px;' placeholder="Messages"/>
-        <input type="submit"/>
-    </form>
+    <h1>Received</h1>
+<div id="received">
 
-    <script type="text/javascript">
-         var socket = io.connect('http://' + document.domain + ':' + location.port);
+</div>
 
-socket.on( 'connect', function() {
-  socket.emit( 'my event', {
-    data: 'User Connected'
-  } )
-  var form = $( 'form' ).on( 'submit', function( e ) {
-    e.preventDefault()
-    let user_name = $( 'input.username' ).val()
-    let user_input = $( 'input.message' ).val()
-    socket.emit( 'my event', {
-      user_name : user_name,
-      message : user_input
-    } )
-    $( 'input.message' ).val( '' ).focus()
-  } )
-} )
-socket.on( 'my response', function( msg ) {
-  console.log( msg )
-  if( typeof msg.user_name !== 'undefined' ) {
-    $( 'h3' ).remove()
-    $( 'div.message_holder' ).append( '<div><b style="color: #000">'+msg.user_name+'</b> '+msg.message+'</div>' )
-  }
-})
-    </script>
+<form id="broadcast" action="#">
+    <input id="input-data" type="text"/>
+    <input type="submit"/>
+</form>
 </body>
 </html>
