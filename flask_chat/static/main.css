@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html, body{
+    width: 100vw;
+    height: 100vh;
+}
+body{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+#main_area{
+    height: 600px;
+    width: 300px;
+    background-color: aqua;
+    flex-direction: column;
+}
+
+#message_area{
+
+    height: 500px;
+    background-color: violet;
+}
+
+#input_area{
+    height: 100px;
+    background-color: yellow;
+}
+
+#input_text{
+    height: 80px;
+    width: 240px;
+}
+
+#send{
+    width: 50px;
+    height: 80px;
+}
