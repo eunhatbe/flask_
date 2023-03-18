@@ -8,12 +8,7 @@
     <title>Flask Chat</title>
     <script src="{{ url_for('static', filename='main.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
-    <script type="text/javascript" charset="utf-8">
-    var socket = io();
-    socket.on('connect', function() {
-        socket.emit('my event', {data: 'hello'});
-    });
-    </script>
+
 </head>
 <body>
     <div id="main_area">
@@ -28,5 +23,22 @@
         </div>
     </div>
 
+
+    <script type="text/javascript" charset="utf-8">
+    var socket = io();
+
+    function send_message(){
+        const inputText = document.getElementById("input_text");
+        const message = inputText.value;
+        inputText.value = "";
+        socket.emit("message", message);
+    }
+
+    socket.on('connect', function() {
+        socket.emit('my event', {data: 'hello'});
+    });
+
+    document.getElementById("send").addEventListener("click", send_message);
+    </script>
 </body>
 </html>
